@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>Article</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ article.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ article.title }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ article.content }}</td>
+        </tr>
+        <tr>
+            <th>ImageFilename</th>
+            <td><img src="{{ asset('uploads/' ~ article.imageFilename) }}" class="img-fluid" alt=""/></td>
+        </tr>
+        <tr>
+            <th>CreatedAt</th>
+            <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Commentaires de cet article</h2>
+
+    {% if app.user %}
+        <div class="my-3">
+            {{ form_start(form) }}
+            {{ form_row(form.content) }}
+            <button type="submit" class="btn btn-primary">Valider</button>
+            {{ form_end(form) }}
+        </div>
+    {% endif %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>CreatedAt</th>
+            <th>Content</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for comment in article.comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ comment.content }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

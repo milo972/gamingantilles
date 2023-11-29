@@ -1,0 +1,152 @@
+{#
+<nav class="navbar navbar-expand-lg bg-success">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" href="{{ path('app_home') }}">A.C.O.D</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active text-light"
+            aria-current="page"
+            href="{{ path('app_home') }}"
+            >Accueil</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-light"
+            aria-current="page"
+            href="{{ path('app_article_index') }}"
+            >Articles</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-light"
+            aria-current="page"
+            href="{{ path('app_category_index') }}"
+            >Catégories</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-light"
+            aria-current="page"
+            href="{{ path('app_contact') }}"
+            >Contactez-nous</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-light"
+            aria-current="page"
+            href="{{ path('app_legals') }}"
+            >Mentions légales</a
+          >
+        </li>
+        {% if not app.user %}
+        <li class="nav-item">
+          <a
+            class="nav-link border border-light rounded-4 m-1"
+            href="{{ path('app_login') }}"
+            >Se connecter</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link border border-light rounded-4 m-1"
+            href="{{ path('app_register') }}"
+            >S'inscrire</a
+          >
+        </li>
+        {% else %} {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-light"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Administration
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                class="dropdown-item text-light"
+                href="{{ path('app_admin_article_index') }}"
+                >Derniers articles</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item text-light"
+                href="{{ path('app_admin_comment_index') }}"
+                >Commentaires</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item text-light"
+                href="{{ path('app_admin_category_index') }}"
+                >Catégories</a
+              >
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a
+                class="dropdown-item text-light"
+                href="{{ path('app_admin_user_index') }}"
+                >Utilisateurs</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ app.user.email }}
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item">
+              <a
+                class="nav-link text-light"
+                href="{{ path('app_profile_edit') }}"
+                >Mon profil</a
+              >
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_logout') }}"
+                >Se déconnecter</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+#}
